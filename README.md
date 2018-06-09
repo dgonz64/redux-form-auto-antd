@@ -1,6 +1,6 @@
 # redux-form-auto-antd
 
-`redux-form-auto-antd` allows your React application to automatically generate forms and validation code using [ReduxForm](https://github.com/erikras/redux-form/) for state management and [Ant Design](https://ant.design/docs/react/introduce) for component rendering.
+`redux-form-auto-antd` allows your React application to automatically generate forms and validation code using [ReduxForm](https://github.com/erikras/redux-form/) for state management and [Ant Design](https://ant.design/docs/react/introduce) for component rendering. It uses [redux-form-antd](https://github.com/zhDmitry/redux-form-antd) to manage ReduxForm field connection.
 
 It extends [redux-form-auto](https://github.com/dgonz64/redux-form-auto) and the API is identical ([documentation](https://dgonz64.github.io/redux-form-auto/)).
 
