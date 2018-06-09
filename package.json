@@ -1,0 +1,48 @@
+{
+  "name": "redux-form-auto-antd",
+  "version": "1.0.0",
+  "description": "Automatic form generation using antd",
+  "main": "./dist/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && babel src --out-dir dist",
+    "prepublishOnly": "npm run build",
+    "watch": "rimraf dist && babel src --out-dir dist --watch --verbose",
+    "demo": "cd demo && npm run buildAndCopy"
+  },
+  "keywords": [
+    "automatic",
+    "form",
+    "generation",
+    "validation",
+    "antd"
+  ],
+  "author": "David González <braben@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dgonz64/redux-form-auto-antd"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0-0 || ^16.0.0-0",
+    "react-redux": "^4.3.0 || ^5.0.0",
+    "redux-form": "^7.0.0",
+    "redux": "^3.0.0",
+    "antd": "^3.0.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "moment": "^2.22.1",
+    "redux-form-antd": "^1.0.5",
+    "redux-form-auto": "^1.0.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "rimraf": "^2.6.2"
+  }
+}

@@ -1,0 +1,6 @@
+.gitignore
+.babelrc
+.nvmrc
+demo
+docs
+package-lock.json

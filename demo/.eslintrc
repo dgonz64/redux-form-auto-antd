@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      // Enable JSX
+      "jsx": true,
+
+      // Enable object rest/spread properties: {...a, ...b}
+      "experimentalObjectRestSpread": true
+    }
+  },
+
+  // If you’re using Flow or experimental ECMAScript features
+  // not supported by ESLint, enable babel-eslint parser
+  "parser": "babel-eslint",
+
+  // Predefined sets of global variables
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  }
+}
