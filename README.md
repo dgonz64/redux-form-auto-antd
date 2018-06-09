@@ -10,7 +10,7 @@ It extends [redux-form-auto](https://github.com/dgonz64/redux-form-auto) and the
 
 ## Installation
 
-  $ npm install redux-form-auto-antd --save
+    $ npm install redux-form-auto-antd --save
 
 ## Usage
 
