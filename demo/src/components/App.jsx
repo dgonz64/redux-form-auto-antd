@@ -53,7 +53,7 @@ addTranslations({
 
 const codeLink = () =>
   <a
-    href='https://github.com/dgonz64/redux-form-auto-antd/demo/src/model.js'
+    href='https://github.com/dgonz64/redux-form-auto-antd/blob/master/demo/src/model.js'
   >
     Link to the schema
   </a>
