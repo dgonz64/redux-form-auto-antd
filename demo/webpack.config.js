@@ -16,7 +16,7 @@ const commonConfig = merge([
       app: PATHS.app,
     },
     output: {
-      filename: '[name].js',
+      filename: '[name].[hash:8].js',
       path: PATHS.build,
     },
     resolve: {
@@ -44,7 +44,7 @@ const commonConfig = merge([
 
 const productionConfig = merge([
   parts.clean(PATHS.build),
-  parts.htmlPlugin({ filename: 'demo.html' }),
+  parts.htmlPlugin({ filename: 'index.html' }),
   parts.minifyJavascript(),
   parts.minifyCSS({
     options: {
