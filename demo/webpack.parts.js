@@ -1,8 +1,7 @@
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const BabiliPlugin = require('babili-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -20,7 +19,7 @@ exports.devServer = ({ host, port } = {}) => ({
 	}
 })
 
-export const htmlPlugin = ({
+exports.htmlPlugin = ({
   filename
 }) => ({
   plugins: [
@@ -65,21 +64,28 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
 
 exports.extractCSS = ({ include, exclude } = {}) => {
 	// Output extracted CSS to a file
-	const plugin = new ExtractTextPlugin({
-		filename: '[name].[contenthash:8].css'
+	const plugin = new MiniCssExtractPlugin({
+		filename: '[name].[hash:8].css'
 	})
 
 	return {
 		module: {
 			rules: [
 				{
-					test: /\.(css|less)$/,
+					test: /\.less$/,
 					include,
 					exclude,
 
-					use: plugin.extract({
-						use: [ cssLoader, lessLoader ]
-					})
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'less-loader',
+              options: {
+                javascriptEnabled: true
+              }
+            }
+          ]
 				}
 			]
 		},
@@ -171,24 +177,6 @@ exports.loadSourceMaps = () => ({
 
 exports.externals = (externals) => ({ externals })
 
-// FIXME There's no way I can get this to work
-exports.optimization = () => ({
-	optimization: {
-		splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: 'all',
-          name: 'vendor',
-          test: /node_modules/,
-          enforce: true
-        }
-      }
-		},
-		noEmitOnErrors: true,
-    runtimeChunk: 'single'
-	}
-})
-
 exports.generateSourceMaps = ({ type }) => ({
 	devtool: type
 })
@@ -200,9 +188,9 @@ exports.clean = (path) => ({
 })
 
 exports.minifyJavascript = () => ({
-	plugins: [
-		new BabiliPlugin()
-	]
+  optimization: {
+    minimize: true
+  }
 })
 
 exports.minifyCSS = ({ options }) => ({
@@ -225,4 +213,3 @@ exports.setFreeVariable = (key, value) => {
 		]
 	}
 }
-

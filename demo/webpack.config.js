@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 
-const parts = require('./webpack.parts.babel')
+const parts = require('./webpack.parts')
 
 const root = process.cwd()
 const PATHS = {
@@ -43,21 +43,6 @@ const commonConfig = merge([
 ])
 
 const productionConfig = merge([
-  {
-    // mode: 'production',
-    // FIXME Get splitting to work
-    // performance: {
-    //   hints: 'warning',
-    //   maxEntrypointSize: 100000,
-    //   maxAssetSize: 450000
-    // },
-    context: PATHS.app,
-    output: {
-      chunkFilename: '[name]_[chunkhash:8].bundle.js',
-      filename: '[name]_[chunkhash:8].bundle.js',
-      path: path.join(root, 'build'),
-    }
-  },
   parts.clean(PATHS.build),
   parts.htmlPlugin({ filename: 'demo.html' }),
   parts.minifyJavascript(),
@@ -76,7 +61,6 @@ const productionConfig = merge([
       name: '[name].[hash:8].[ext]'
     }
   }),
-  // parts.optimization(),
   parts.setFreeVariable(
     'process.env.NODE_ENV',
     'production'
@@ -85,7 +69,6 @@ const productionConfig = merge([
 
 const developmentConfig = merge([
   {
-    // mode: 'development',
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
@@ -105,11 +88,9 @@ const developmentConfig = merge([
   parts.loadImages()
 ])
 
-module.exports = (env = {}) => {
-  process.env.BABEL_ENV = env
-
-  if (env.target === 'production') {
-    return merge(commonConfig, productionConfig)
+module.exports = (mode) => {
+  if (mode === 'production') {
+    return merge(commonConfig, productionConfig, { mode })
   }
 
   return merge(commonConfig, developmentConfig)
